@@ -20,6 +20,7 @@ public class ArticleCrawlerService {
                 .build();
     }
 
+    // 파이썬 서버 크롤링 요청
     public ArticleListResponse getCrawler(){
         try {
             ArticleListResponse response = webClient.post()
@@ -37,6 +38,7 @@ public class ArticleCrawlerService {
         }
     }
 
+    // 파이썬 서버 헬스체크
     public boolean isHealth() {
         try {
             HealthResponse response = webClient.get()
