@@ -1,9 +1,11 @@
 package kr.co.newgyo.article.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.co.newgyo.article.entity.Article;
 import kr.co.newgyo.article.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 // 이 서비스 클레스는 ArticleService와 합쳐질 가능성 있음
@@ -24,7 +26,8 @@ public class ArticleDetailService {
         Long number = random.nextLong(1) + 1;
 
         // 난수로 기사 가져오기
-        return articleRepository.findById(number);
+        return articleRepository.findById(number)
+                .orElseThrow(() -> new EntityNotFoundException("기사 ID " + number + "를 찾을 수 없습니다."));
     }
 
     // 카테고리별 기사 정하는 메서드
@@ -50,6 +53,7 @@ public class ArticleDetailService {
         // 뉴스 데이터 다 보내는데
         // 필요한 데이터만 보내야하나
         // 요약 키워드를 가지고 요약내용 바꿔야함
-        return articleRepository.findById(id);
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("기사 ID " + id + "를 찾을 수 없습니다."));
     }
 }
