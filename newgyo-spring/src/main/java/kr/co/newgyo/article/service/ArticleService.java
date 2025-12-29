@@ -29,7 +29,7 @@ public class ArticleService {
         try {
             // 파이썬 서버 헬스 체크
             if (!articleCrawlerService.isHealth()) {
-                log.warn("[파이썬 서버 오류]");
+                log.warn("[파이썬 서버 안 떠 있음 - 크롤링 스킵]");
                 return;
             }
 
