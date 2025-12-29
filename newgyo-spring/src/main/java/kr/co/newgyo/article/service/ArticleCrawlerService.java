@@ -5,6 +5,7 @@ import kr.co.newgyo.article.dto.HealthResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  * 파이썬 서버로 크롤링 요청
@@ -45,6 +46,7 @@ public class ArticleCrawlerService {
                     .uri("/api/health")
                     .retrieve()
                     .bodyToMono(HealthResponse.class)
+                    .onErrorResume(e -> Mono.empty())
                     .block();
 
             return response != null && "up".equals(response.getStatus());
