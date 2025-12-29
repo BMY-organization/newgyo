@@ -1,7 +1,7 @@
 package kr.co.newgyo.article.controller;
 
-//import kr.co.newgyo.article.entity.Article;
-//import kr.co.newgyo.article.service.ArticleDetailService;
+import kr.co.newgyo.article.entity.Article;
+import kr.co.newgyo.article.service.ArticleDetailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
-//    // ArticleService 받기
-//    ArticleDetailService articleDetailService;
-//
-//    public ArticleController(ArticleDetailService articleDetailService) {
-//        this.articleDetailService = articleDetailService;
-//    }
+    // ArticleService 받기
+    ArticleDetailService articleDetailService;
+
+    public ArticleController(ArticleDetailService articleDetailService) {
+        this.articleDetailService = articleDetailService;
+    }
 
     @GetMapping("/domestic")
     public String domestic(Model model){
@@ -37,7 +37,7 @@ public class ArticleController {
         // 디비에 해당하는 id값의 뉴스가 없을 때
 
         // 데이터는 json으로?
-//        model.addAttribute("article",articleDetailService.getDetailArticleData(id));
+        model.addAttribute("article",articleDetailService.getDetailArticleData(id));
 
         return "articleDetail";
     }
