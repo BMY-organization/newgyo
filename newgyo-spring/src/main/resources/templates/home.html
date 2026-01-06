@@ -17,9 +17,11 @@
             <span class="section-icon">🔥</span>
             <span class="section-title">주요 뉴스</span>
         </div>
-        <div class="main-news">
+        <div class="main-news" th:data-id="${article.id}">
+<!--            메인뉴스 클릭시 id 와 함께 상세페이지로 이동-->
+<!--            데이터를 불러올 때 id 가 포함되어 있어야 한다-->
             <div>
-                <img th:src="@{/images/test.jpg}" alt="뉴스 이미지" class="news-image">
+                <img th:src="${article.url}" alt="뉴스 이미지" class="news-image">
             </div>
             <div class="news-content">
                 <div class="news-source">
@@ -27,7 +29,7 @@
                     <span>MBC 뉴스</span>
                 </div>
                 <div class="news-title">
-                    북한, ICBM 포함 3발 발사..위협 대응 시작
+                    <p th:text="${article.title}"></p>
                 </div>
                 <div class="news-meta">
                     <div class="news-actions">
@@ -112,5 +114,17 @@
         </div>
     </div>
 </div>
+<script>
+        // .main-news 요소를 클릭했을 때 상세페이지로 이동
+        document.querySelectorAll('.main-news').forEach(function(newsItem) {
+            newsItem.addEventListener('click', function() {
+                const id = this.dataset.id;
+                if (id) {
+                    location.href = `/article/detail/${id}`;
+                }
+            });
+        });
+        // 페이지 불러올때 데이터 id를 노드에 추가하는 js 가 필요할듯 함
+</script>
 </body>
 </html>
