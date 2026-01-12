@@ -54,6 +54,10 @@ public class JWTFilter extends OncePerRequestFilter {
                 }
             } catch (Exception e) {
                 System.out.println("JWT 검증 실패: " + e.getMessage());
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().write("{\"error\":\"" + e.getMessage() + "\", \"code\":401}");
+                return;
             }
         }
 
