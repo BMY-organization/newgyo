@@ -1,6 +1,6 @@
 package kr.co.newgyo.batch;
 
-import kr.co.newgyo.client.SummaryClient;
+import kr.co.newgyo.client.PythonApiClient;
 import kr.co.newgyo.article.dto.SummaryRequest;
 import kr.co.newgyo.article.dto.SummaryResponse;
 import kr.co.newgyo.article.entity.Article;
@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class SummaryProcessor implements ItemProcessor<Article, SummaryResult> {
-    private final SummaryClient summaryClient;
+    private final PythonApiClient pythonApiClient;
 
     @Override
     public SummaryResult process(@NonNull Article article){
@@ -32,7 +32,7 @@ public class SummaryProcessor implements ItemProcessor<Article, SummaryResult> {
             );
 
             // AI 요약 서버 호출
-            List<SummaryResponse> responses = summaryClient.getSummary(List.of(request));
+            List<SummaryResponse> responses = pythonApiClient.getSummary(List.of(request));
 
             if (responses.isEmpty()) {
                 throw new IllegalStateException("요약 결과가 없습니다.");
