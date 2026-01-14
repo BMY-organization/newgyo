@@ -26,12 +26,8 @@ public class JoinService {
             return;
         }
 
-        User user = new User(
-                username,
-                bCryptPasswordEncoder.encode(password),
-                "ADMIN"
-        );
+        User userBuilder = User.builder().username(username).password(password).role("ADMIN").build();
 
-        userRepository.save(user);
+        userRepository.save(userBuilder);
     }
 }
