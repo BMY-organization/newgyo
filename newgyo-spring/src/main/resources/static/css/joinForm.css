@@ -1,0 +1,40 @@
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: var(--font-weight-md);
+    color: var(--color-text-black);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: var(--font-base);
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(118, 142, 248, 0.2);
+}
+
+.form-control.is-invalid {
+    border-color: #ef4444;
+}
+
+.error-message {
+    margin-top: 6px;
+    font-size: var(--font-xs);
+    color: #ef4444;
+    display: none;
+}
+
+.d-grid .btn-primary {
+    width: 100%;
+}

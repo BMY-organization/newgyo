@@ -7,6 +7,7 @@ import kr.co.newgyo.user.dto.KakaoUserInfo;
 import kr.co.newgyo.user.entity.Token;
 import kr.co.newgyo.user.entity.User;
 import kr.co.newgyo.user.enums.LoginProvider;
+import kr.co.newgyo.user.enums.Role;
 import kr.co.newgyo.user.repository.TokenRepository;
 import kr.co.newgyo.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -120,7 +121,7 @@ public class KakaoService {
         User user  = User.builder()
                 .username(userInfo.getEmail())
                 .password(null)
-                .role("ADMIN")
+                .role(Role.USER)
                 .isSubscribed(false)
                 .provider(LoginProvider.KAKAO)
                 .build();

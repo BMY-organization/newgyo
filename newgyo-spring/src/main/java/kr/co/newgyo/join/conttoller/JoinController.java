@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
+@RequestMapping("/join")
 public class JoinController {
     private final JoinService joinService;
 
@@ -17,18 +21,21 @@ public class JoinController {
     }
 
     //회원가입 화면
-    @GetMapping("/join-page")
-    public String UserLogin(){
+    @GetMapping("/joinPage")
+    public String UserLogin(Model model){
+        model.addAttribute("email","email 형식");
+        model.addAttribute("nickname","nickname 형식");
         return "join";
     }
 
     //회원가입 POST
-    @PostMapping("/join")
+    @PostMapping("/inputJoin")
     public String join(@RequestBody UserDto userDto) {
         joinService.joinProcess(userDto);
 
-        return "redirect:/login-page";
+        return "redirect:/loginPage";
     }
+
     //클라이언트에서 fetch를 사용할경우 return "redirect:/login-page"은 동작하지 않는다
     //json 데이터로 리다이렉트와 주소를 보내 클라이언트에서 이동시킨다
 

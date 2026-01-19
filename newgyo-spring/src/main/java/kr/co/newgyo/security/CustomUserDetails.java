@@ -2,10 +2,12 @@ package kr.co.newgyo.security;
 
 import kr.co.newgyo.user.entity.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -15,18 +17,13 @@ public class CustomUserDetails implements UserDetails {
         this.user = user;
     }
 
-
+    // Spring Security는 권한(특히 역할 기반 권한)을 볼 때
+    // 반드시 "ROLE_"로 시작하는 문자열을 기대한다
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collection = new ArrayList<>();
-
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return user.getRole();
-            }
-        });
-        return collection;
+        return List.of(
+                new SimpleGrantedAuthority("ROLE_" + user.getRole().name())
+        );
     }
 
     @Override

@@ -4,25 +4,17 @@ import kr.co.newgyo.jwt.JwtUtil;
 import kr.co.newgyo.security.CustomUserDetailsService;
 import kr.co.newgyo.security.JWTFilter;
 import kr.co.newgyo.security.LoginFilter;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 
 
 //이 클래스는 Bean들을 정의하는 설정 클래스
@@ -84,19 +76,24 @@ public class WebSecurityConfig {
                         // 🔓 HTML 페이지
                         .requestMatchers(
                                 "/home/**",
+                                "/login/**",
                                 "/loginPage",
-                                "/join-page",
                                 "/JS/**",
                                 "/css/**",
+                                // 카카오 컨트롤러
                                 "/login/kakao",
                                 "/kakao-callback.html",
+                                // 기사 관련
                                 "/article/**",
                                 // 채팅 관련
                                 "/ws-chat/**",
-                                "/webjars/**"
+                                "/webjars/**",
+                                // 회원 가입 관련
+                                "/join/**",
+                                "/join/joinPage"
                         ).permitAll()
                         // 🔐 보호할 API
-                        .requestMatchers("/api/**").authenticated().anyRequest().denyAll()
+                        .requestMatchers("/api/**", "/article/**").authenticated().anyRequest().denyAll()
                 );
 
 
