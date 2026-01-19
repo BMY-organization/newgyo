@@ -55,4 +55,9 @@ public class User {
     public void assignToken(Token token){
         this.token = token;
     }
+
+    // 구독 데이터 변경
+    public void chSubscribe(Boolean chSub){
+        this.isSubscribed = chSub;
+    }
 }

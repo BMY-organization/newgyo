@@ -16,6 +16,13 @@
     </svg>
 </div>
 
+<div id="subscription-button" title="Subscription / Premium">
+    <!-- 간단한 왕관 아이콘 (가장 무난하고 인기 많음) -->
+    <svg viewBox="0 0 24 24">
+        <path d="M12 2L2 10.5L5 21H19L22 10.5L12 2ZM12 17.5L7.5 14.5L9 10.5L12 12.5L15 10.5L16.5 14.5L12 17.5Z"/>
+    </svg>
+</div>
+
 <!-- 챗봇 모달 창 -->
 <div id="chatbot-modal">
     <div class="chat-header">
@@ -30,6 +37,58 @@
         <button onclick="send()">➤</button>
     </div>
 </div>
+
+<!-- 구독 모달 창 -->
+<div id="subscription-modal">
+    <div class="sub-header">
+        구독
+        <button class="close-sub-btn">×</button>
+    </div>
+
+    <div class="sub-body">
+        <div class="premium-icon-container">
+            <svg viewBox="0 0 24 24" class="premium-crown">
+                <path d="M12 2L2 10.5L5 21H19L22 10.5L12 2ZM12 17.5L7.5 14.5L9 10.5L12 12.5L15 10.5L16.5 14.5L12 17.5Z"/>
+            </svg>
+        </div>
+
+        <h2>newgyo 카카오 구독</h2>
+        <p class="sub-description">최신 기사를 카카오톡으로!</p>
+
+        <div class="plan-card premium-active">
+            <div class="plan-title">원하는 분야를 선택하세요</div>
+
+            <ul class="plan-benefits">
+                <li>
+                    <label>
+                        <input type="checkbox" name="category" value="경제">
+                        <span>경제</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="category" value="IT">
+                        <span>IT</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="category" value="정치">
+                        <span>정치</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" name="category" value="사회">
+                        <span>사회</span>
+                    </label>
+                </li>
+            </ul>
+            <button class="subscribe-btn">선택한 분야로 구독하기</button>
+        </div>
+    </div>
+</div>
+
 <script src="/JS/chatModal.js"></script>
 <script src="/JS/socket.js"></script>
 </body>
