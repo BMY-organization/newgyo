@@ -25,7 +25,6 @@ import java.util.Map;
 @Slf4j
 @Service
 public class KakaoService {
-
     @Value("${kakao.token-uri}")
     private String tokenUri;
 
@@ -77,6 +76,7 @@ public class KakaoService {
         return creatJWTtoken(user);
     }
 
+    // TODO : api로 분리
     public KakaoTokenResponse getAccessTokenFromKakao(String code){
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("grant_type", "authorization_code");
@@ -110,7 +110,6 @@ public class KakaoService {
         log.info("[User Id] {}", response.getId());
         log.info("[User Email] {}", response.getEmail());
         log.info("[User Nickname] {}", response.getNickname());
-
 
         return response;
     }
