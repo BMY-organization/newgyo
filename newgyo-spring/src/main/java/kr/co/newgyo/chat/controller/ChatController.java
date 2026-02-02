@@ -14,11 +14,9 @@ import java.util.Map;
 
 @Controller
 public class ChatController {
-    private final SimpMessagingTemplate messagingTemplate;
     private final RestTemplate restTemplate;
 
-    public ChatController(SimpMessagingTemplate messagingTemplate, RestTemplate restTemplate) {
-        this.messagingTemplate = messagingTemplate;
+    public ChatController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
@@ -32,7 +30,7 @@ public class ChatController {
     public ChatMessageResponse sendMessage(@Payload ChatMessageResponse chatMessage) {
         // 여기서 Python으로 전달하는 로직 추가할 예정
         // Python 서버로 HTTP POST 요청
-        String pythonUrl = "http://localhost:5000/api/chat";  // Python 서버 주소
+        String pythonUrl = "http://localhost:5000/api/chatAi";  // Python 서버 주소
 
         // 요청 바디 (JSON)
         Map<String, String> request = new HashMap<>();

@@ -55,7 +55,7 @@ public class SubscribeService {
         // 레코드 객체 생성
         // 각 레코드와 유저 데이터를 유저키워드에 저장하는 로직 구현 -> 최적화
         // for 문에서 jpa crud를 사용할 땐 쿼리 한번으로 끝낼 수 있나 생각하자
-        List<Keyword> keywordOb = keywordRepository.findByKeywordIn(categories);
+        List<Keyword> keywordOb = keywordRepository.findByNameIn(categories);
 
         for( Keyword keyword : keywordOb){
 
