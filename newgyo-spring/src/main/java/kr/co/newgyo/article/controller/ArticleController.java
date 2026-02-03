@@ -19,6 +19,11 @@ public class ArticleController {
     @GetMapping("/domestic")
     public String domestic(@RequestParam(required = false) Long categoryId, Model model){
         model.addAttribute("domestic", service.getDomesticArticles(categoryId));
+
+        // 카테고리 필터
+        model.addAttribute("category", service.getAllCategory());
+        model.addAttribute("categoryId", categoryId);
+
         return "article";
     }
 
