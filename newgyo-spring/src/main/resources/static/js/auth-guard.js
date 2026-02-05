@@ -6,7 +6,7 @@ async function applyJwtAuth() {
     window.jwtAuthApplied = true;
 
     const token = localStorage.getItem('Authorization'); // 저장된 토큰
-    const publicPaths = ['/loginPage', '/joinPage', '/login', '/join']; // 다시 설정하기
+    const publicPaths = ['/login', '/join']; // 다시 설정하기
 
     console.log('[JWT Guard] 현재 경로:', window.location.pathname);
     console.log('[JWT Guard] 토큰 존재:', !!token);
@@ -18,7 +18,7 @@ async function applyJwtAuth() {
 
     if (!token) {
         console.log('[JWT Guard] 토큰 없음 → 로그인 페이지로 이동');
-        window.location.href = '/loginPage';
+        window.location.href = '/login';
         return;
     }
 
@@ -42,11 +42,11 @@ async function applyJwtAuth() {
         } else {
             alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
             localStorage.removeItem('Authorization');
-            window.location.href = '/loginPage';
+            window.location.href = '/login';
         }
     } catch (err) {
         console.error('[JWT Guard] 네트워크 오류:', err);
-        window.location.href = '/loginPage';
+        window.location.href = '/login';
     }
 }
 

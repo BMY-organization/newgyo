@@ -139,3 +139,16 @@ a {
     font-size: var(--font-xs);
     color: var(--color-text-lightgray);
 }
+
+/* 기본 로그인 링크 스타일 */
+.login-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+/* 로그아웃 모드일 때 (JS로 추가됨) */
+.login-link.logout-mode {
+    color: white; /* 로그아웃은 눈에 띄게 빨간색 계열 */
+}

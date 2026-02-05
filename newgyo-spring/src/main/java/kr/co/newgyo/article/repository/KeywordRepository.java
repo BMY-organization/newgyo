@@ -10,5 +10,5 @@ public interface KeywordRepository extends JpaRepository<Keyword, Long> {
     Optional<Keyword> findByName(String name);
     Optional<Keyword> findByCode(String code);
     // Keyword findByKeyword(String keyword); 말고 in 을 사용
-    List<Keyword> findByKeywordIn(List<String> keywords);
+    List<Keyword> findByNameIn(List<String> keywords);
 }

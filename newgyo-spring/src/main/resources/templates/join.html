@@ -21,7 +21,7 @@
                     회원가입
                 </h3>
 
-                <form id="signupForm" th:action="@{/join/inputJoin}" method="post" novalidate>
+                <form id="signupForm" th:action="@{/join}" method="post" novalidate>
                     <!-- 이메일 -->
                     <div class="form-group mb-4">
                         <label for="email" class="form-label">이메일</label>
@@ -80,6 +80,6 @@
         </div>
     </div>
 </div>
-<script th:src="@{/JS/join.js}"></script>
+<script th:src="@{/js/join.js}"></script>
 </body>
 </html>

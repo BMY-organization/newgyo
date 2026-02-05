@@ -43,7 +43,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     };
 
     try {
-        const response = await fetch('/join/inputJoin', {
+        const response = await fetch('/join', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
 
         if (response.ok) {
             // 성공 → 리다이렉트
-            window.location.href = '/loginPage';
+            window.location.href = '/login';
         } else {
             // 실패 처리 (서버에서 에러 메시지 반환했다고 가정)
             const errorData = await response.json();

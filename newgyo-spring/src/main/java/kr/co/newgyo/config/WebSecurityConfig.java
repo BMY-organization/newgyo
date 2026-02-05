@@ -75,10 +75,10 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                         // 🔓 HTML 페이지
                         .requestMatchers(
-                                "/home/**",
+                                "/",
+                                "/login",
                                 "/login/**",
-                                "/loginPage",
-                                "/JS/**",
+                                "/js/**",
                                 "/css/**",
                                 // 카카오 컨트롤러
                                 "/login/kakao",
@@ -89,11 +89,10 @@ public class WebSecurityConfig {
                                 "/ws-chat/**",
                                 "/webjars/**",
                                 // 회원 가입 관련
-                                "/join/**",
-                                "/join/joinPage"
+                                "/join/**"
                         ).permitAll()
                         // 🔐 보호할 API
-                        .requestMatchers("/api/**", "/article/**").authenticated().anyRequest().denyAll()
+                        .requestMatchers("/api/**").authenticated().anyRequest().denyAll()
                 );
 
 

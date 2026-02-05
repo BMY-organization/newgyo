@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -24,16 +25,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     public LoginFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-        setFilterProcessesUrl("/login");
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
+        //        attemptAuthentication 동작
         try{
             //json 으로 된 body 데이터 확인 및 데이터로 토큰 만들기
             UserDto UserRequest = new ObjectMapper().readValue(request.getInputStream(), UserDto.class);
-
             //스프링 시큐리티에서 username과 password를 검증하기 위해서는 token에 담아야 함
             //jwt토큰이 아니라 security가 생성하는 토큰
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(UserRequest.getUsername(), UserRequest.getPassword(), null);

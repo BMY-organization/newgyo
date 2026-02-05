@@ -21,7 +21,7 @@ public class JoinController {
     }
 
     //회원가입 화면
-    @GetMapping("/joinPage")
+    @GetMapping
     public String UserLogin(Model model){
         model.addAttribute("email","email 형식");
         model.addAttribute("nickname","nickname 형식");
@@ -29,11 +29,11 @@ public class JoinController {
     }
 
     //회원가입 POST
-    @PostMapping("/inputJoin")
+    @PostMapping
     public String join(@RequestBody UserDto userDto) {
         joinService.joinProcess(userDto);
 
-        return "redirect:/loginPage";
+        return "redirect:/login";
     }
 
     //클라이언트에서 fetch를 사용할경우 return "redirect:/login-page"은 동작하지 않는다
