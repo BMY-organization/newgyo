@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     Boolean existsByUrl(String url);
@@ -21,5 +22,9 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 //    List<Article> findTop3(Sort sorting);
 //    List<Article> findTop3ByKeywordId(Long keywordId, Sort sorting);
 
-    List<Article> findByKeywordId(Long categoryId);
+    // 전체 키워드별 기사
+    List<Article> findByKeywordIdIn(Set<Long> keywordIds);
+
+    // 유저별 키워드
+    List<Article> findByKeywordId(Long keywordId);
 }

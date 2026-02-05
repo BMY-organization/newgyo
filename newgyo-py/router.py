@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 from scraper import scrap_news_list
 from typing import List
-from schemas import SummaryRequest, SummaryResponse
+from schemas import SummaryRequest, SummaryResponse, ChatRequest
+from chatAi import chat_Ai as call_chat_gpt
 from summary import news_summary
 
 router = APIRouter()
@@ -18,3 +19,7 @@ async def scrap_news():
 @router.post("/summary", response_model=List[SummaryResponse])
 async def summarize_news(requests: List[SummaryRequest]):
     return await news_summary(requests)
+
+@router.post("/chatAi")
+async def chat_Ai(request: ChatRequest):
+    return await call_chat_gpt(request)

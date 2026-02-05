@@ -1,8 +1,6 @@
 package kr.co.newgyo.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -13,6 +11,8 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
+import static reactor.netty.http.HttpConnectionLiveness.log;
+
 @Component
 public class JwtUtil {
 
@@ -21,7 +21,7 @@ public class JwtUtil {
 
     private Key key;
 
-    private final long TOKEN_TIME = 60 * 60 * 1000L; // 60분
+    private final long TOKEN_TIME = 1 * 60 * 1000L; // 15분 = 3600초 = 3,600,000 밀리초
     public static final String BEARER_PREFIX = "Bearer ";
 
 
@@ -54,9 +54,15 @@ public class JwtUtil {
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();  // ← subject에서 추출 (setSubject(username)으로 넣었으니까!)
+        } catch (ExpiredJwtException e) {
+            log.warn("JWT 만료: {}", e.getMessage());
+            throw new JwtException("만료된 토큰입니다.");  // ← 예외 던지기!
+        } catch (SignatureException | MalformedJwtException e) {
+            log.warn("JWT 서명/형식 오류: {}", e.getMessage());
+            throw new JwtException("유효하지 않은 토큰입니다.");
         } catch (Exception e) {
-            System.out.println("토큰에서 username 추출 실패: " + e.getMessage());
-            return null;
+            log.error("JWT 파싱 오류: {}", e.getMessage(), e);
+            throw new JwtException("토큰 처리 오류");
         }
     }
 

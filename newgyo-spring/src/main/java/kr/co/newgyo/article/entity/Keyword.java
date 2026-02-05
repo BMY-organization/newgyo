@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name="keyword")
+@Table(name="KEYWORD")
 public class Keyword {
     @Id
+    @Column(name="KEYWORD_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

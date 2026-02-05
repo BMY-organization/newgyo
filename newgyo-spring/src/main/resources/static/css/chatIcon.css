@@ -25,6 +25,34 @@
     height: 35px;
     fill: white;
 }
+/* 떠 있는 구독 버튼 */
+#subscription-button {
+    position: fixed;
+    bottom: 110px;          /* chatbot-button 위로 20px + 높이 60px + 여유 */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #f1c40f;    /* 금색 느낌 (구독/프리미엄 느낌 강하게) */
+    /* 또는 #9b59b6 (보라) / #e74c3c (빨강) 등 원하는 색 */
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: transform 0.2s;
+}
+
+#subscription-button:hover {
+    transform: scale(1.1);
+}
+
+#subscription-button svg {
+    width: 35px;
+    height: 35px;
+    fill: white;
+}
 
 /* 채팅 창 (모달) */
 #chatbot-modal {
@@ -142,4 +170,151 @@
     padding: 10px 15px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+/* 구독 모달 기본 스타일 */
+#subscription-modal {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 380px;
+    height: 520px;
+    background: white;
+    color: black;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    z-index: 1002;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+#subscription-modal.open {
+    display: flex;
+}
+
+/* 헤더 */
+.sub-header {
+    background: #768ef8;
+    padding: 18px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    position: relative;
+    color: #111;
+}
+
+.close-sub-btn {
+    position: absolute;
+    right: 16px;
+    top: 14px;
+    background: none;
+    border: none;
+    color: #111;
+    font-size: 28px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.close-sub-btn:hover {
+    opacity: 1;
+}
+
+/* 본문 */
+.sub-body {
+    flex: 1;
+    padding: 24px 20px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.premium-icon-container {
+    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
+    background: rgba(241, 196, 15, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #f1c40f;
+}
+
+.premium-crown {
+    width: 52px;
+    height: 52px;
+    fill: #f1c40f;
+}
+
+.sub-body h2 {
+    font-size: 1.6rem;
+    margin: 12px 0 8px;
+    color: black;
+}
+
+.sub-description {
+    color: black;
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+}
+
+/* 플랜 카드 */
+.plan-card {
+    background: rgba(255,255,255,0.08);
+    border: 2px solid #444;
+    border-radius: 14px;
+    padding: 24px 18px;
+    margin: 0 auto;
+    max-width: 320px;
+}
+
+.plan-card.premium-active {
+    border-color: #f1c40f;
+    background: rgba(241, 196, 15, 0.08);
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.25);
+}
+
+.plan-benefits input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #f1c40f;
+    cursor: pointer;           /* 중요: 클릭 가능하게 */
+}
+
+.plan-benefits label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;           /* 라벨 클릭 시에도 체크 */
+    user-select: none;
+}
+
+.plan-benefits input[type="checkbox"]:not(:checked) {
+    background-color: rgba(241, 196, 15, 0.1);
+    border: 2px solid #555;
+}
+
+/* 호버 시 살짝 강조 (선택사항) */
+.plan-benefits label:hover {
+    opacity: 0.92;
+}
+
+
+/* 구독 버튼 */
+.subscribe-btn {
+    background: #768ef8;
+    color: #111;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 50px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
 }

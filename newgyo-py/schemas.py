@@ -7,3 +7,7 @@ class SummaryRequest(BaseModel):
 class SummaryResponse(BaseModel):
     id: int
     summary: str
+
+class ChatRequest(BaseModel):
+    content: str
+    sender: str = "User"    
