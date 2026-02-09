@@ -17,9 +17,7 @@ services:
 
 # Spring Boot Application
   spring:
-    build:
-      context: ./newgyo-spring
-    image: newgyo-spring-app
+    image: yul554/newgyo-spring:latest
     container_name: newgyo-spring
     depends_on:
       - mysql
