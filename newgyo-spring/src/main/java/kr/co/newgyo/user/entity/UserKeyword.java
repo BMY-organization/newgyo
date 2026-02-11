@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class UserKeyword {
 
     @Id
-    @Column(name="USER_KETWORD_ID")
+    @Column(name="USER_KEYWORD_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
