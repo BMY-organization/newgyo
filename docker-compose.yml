@@ -1,3 +1,4 @@
+#  Docker Compose 파일 자체의 규격(문법) 버전
 version: "3.8"
 
 services:
@@ -11,9 +12,14 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${DB_ROOT_PASSWORD}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 # Spring Boot Application
   spring:
@@ -21,8 +27,6 @@ services:
       context: ./newgyo-spring
     image: newgyo-spring-app
     container_name: newgyo-spring
-    depends_on:
-      - mysql
     ports:
       - "8080:8080"
     environment:
@@ -33,9 +37,23 @@ services:
       PASSPHRASE: ${PASSPHRASE}
       SALT: ${SALT}
       SERVER_ADDRESS: 0.0.0.0
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: on-failure
 
 # TODO: Python Application
-
+  python:
+    build:
+      context: ./newgyo-py # 파이썬 Dockerfile이 있는 경로
+    image: newgyo-python          # 빌드 후 생성될 이미지 이름
+    ports:
+      - "5000:5000"                  # [내 컴퓨터]:[컨테이너 내부]
+    environment:
+        CHAT_KEY: ${CHAT_KEY}
+        OPENAI_API_KEY: ${OPENAI_API_KEY} # 내 컴퓨터의 환경변수를 그대로 전달 (- 와 같은 리스트 형태)
+        SERVER_ADDRESS: 0.0.0.0
+    restart: always
 
 networks:
   newgyo-network:
