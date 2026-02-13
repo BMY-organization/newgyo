@@ -41,10 +41,11 @@ services:
 
 # Python Application
   python:
-    build:
-      context: ./newgyo-py
-    image: newgyo-python
-    container_name: newgyo-python-srv
+    image: yul554/newgyo-python:latest
+    container_name: newgyo-python
+    depends_on:
+      - mysql
+      - spring
     ports:
       - "8000:8000"
     environment:
@@ -59,3 +60,4 @@ networks:
 
 volumes:
   mysql_data:
+#  playwright_cache:
