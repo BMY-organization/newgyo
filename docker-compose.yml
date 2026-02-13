@@ -1,4 +1,3 @@
-#  Docker Compose 파일 자체의 규격(문법) 버전
 version: "3.8"
 
 services:
@@ -12,7 +11,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -23,10 +22,11 @@ services:
 
 # Spring Boot Application
   spring:
-    build:
-      context: ./newgyo-spring
-    image: newgyo-spring-app
+    image: yul554/newgyo-spring:latest
     container_name: newgyo-spring
+    depends_on:
+      mysql :
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
@@ -37,9 +37,6 @@ services:
       PASSPHRASE: ${PASSPHRASE}
       SALT: ${SALT}
       SERVER_ADDRESS: 0.0.0.0
-    depends_on:
-      mysql:
-        condition: service_healthy
     restart: on-failure
 
 # TODO: Python Application

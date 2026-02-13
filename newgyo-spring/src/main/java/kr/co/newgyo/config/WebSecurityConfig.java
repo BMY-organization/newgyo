@@ -73,7 +73,17 @@ public class WebSecurityConfig {
         );
 
         http.authorizeHttpRequests(auth -> auth
-                        // 🔓 HTML 페이지
+                        // 정적 리소스
+                        .requestMatchers(
+                                "/**/*.html",
+                                "/**/*.css",
+                                "/**/*.js",
+                                "/**/*.png",
+                                "/**/*.jpg",
+                                "/**/*.ico",
+                                "/webjars/**"
+                        ).permitAll()
+                        // 인증 없이 접근 가능한 API
                         .requestMatchers(
                                 "/",
                                 "/login",
@@ -91,8 +101,9 @@ public class WebSecurityConfig {
                                 // 회원 가입 관련
                                 "/join/**"
                         ).permitAll()
-                        // 🔐 보호할 API
-                        .requestMatchers("/api/**").authenticated().anyRequest().denyAll()
+                        // 보호할 API
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().authenticated()
                 );
 
 
